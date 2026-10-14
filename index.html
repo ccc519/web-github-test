@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="今天吃什麼？從七種日常餐點中，隨機選出今天的美味。">
+    <meta name="theme-color" content="#faf7f0">
+    <title>今天吃什麼？</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html" aria-label="今天吃什麼？首頁">
+          <span class="brand-icon" aria-hidden="true">🍳</span>
+          <span>今天吃什麼？</span>
+        </a>
+        <span class="version"><span class="version-dot" aria-hidden="true"></span> V1.0</span>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow"><span aria-hidden="true">✳</span> 每天最幸福的小煩惱</p>
+          <h1 id="page-title">今天<br class="mobile-break">吃<span class="title-accent">什麼</span>？</h1>
+          <p class="intro-copy">選擇困難先放一邊，<br class="mobile-break">讓一點點運氣決定今天的美味。</p>
+          <div class="intro-sticker" aria-hidden="true">
+            <span class="sticker-star">✧</span>
+            <span>好好吃飯<br>好好生活</span>
+          </div>
+        </section>
+
+        <div class="menu-layout">
+          <section class="decision-card" aria-labelledby="decision-title">
+            <div class="section-label"><span class="label-line" aria-hidden="true"></span><h2 id="decision-title">今日的美味提案</h2></div>
+
+            <div class="result-art" aria-hidden="true">
+              <span class="art-spark art-spark-left">✦</span>
+              <svg id="welcome-art" class="bowl-art" viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="120" cy="165" rx="76" ry="9" fill="#e9cfc0" opacity=".55"/>
+                <path d="M79 44c-12-13 10-17 0-30M121 39c-12-13 10-17 0-30M163 44c-12-13 10-17 0-30" fill="none" stroke="#d5b6a1" stroke-width="5" stroke-linecap="round"/>
+                <path d="M38 90c4 45 30 71 82 71s78-26 82-71" fill="#ef9072" stroke="#713e2c" stroke-width="4"/>
+                <path d="M45 103c14 13 134 13 151 0" fill="none" stroke="#f8bca2" stroke-width="8"/>
+                <ellipse cx="120" cy="88" rx="84" ry="27" fill="#fff0c8" stroke="#713e2c" stroke-width="4"/>
+                <path d="M60 86c15-22 25 24 40 0s25 22 41 0 23 19 37 0M74 96c12-17 23 15 37-2s21 18 34 0" fill="none" stroke="#dfb96c" stroke-width="5" stroke-linecap="round"/>
+                <path d="M145 59c-3-13 16-23 25-11 16-4 26 14 14 23-13 12-44 4-39-12" fill="#fffdf2" stroke="#713e2c" stroke-width="3"/>
+                <ellipse cx="164" cy="61" rx="12" ry="10" fill="#f3c64e"/>
+                <path d="m77 66 5 10m15-14 3 10m21-7-2 10" stroke="#74916a" stroke-width="7" stroke-linecap="round"/>
+                <circle cx="100" cy="130" r="4" fill="#713e2c"/>
+                <circle cx="140" cy="130" r="4" fill="#713e2c"/>
+                <path d="M112 139q8 8 16 0" fill="none" stroke="#713e2c" stroke-width="3" stroke-linecap="round"/>
+                <ellipse cx="88" cy="139" rx="7" ry="4" fill="#cf6858" opacity=".6"/>
+                <ellipse cx="152" cy="139" rx="7" ry="4" fill="#cf6858" opacity=".6"/>
+              </svg>
+              <span id="result-emoji" class="result-emoji" hidden></span>
+              <span class="art-spark art-spark-right">✧</span>
+            </div>
+
+            <div class="result-copy" role="status" aria-live="polite" aria-atomic="true">
+              <p id="result-caption" class="result-caption">肚子餓了嗎？</p>
+              <p id="result-name" class="result-name">你的下一餐，等你揭曉</p>
+              <p id="result-description" class="result-description">按一下，把今天的選擇交給我們。</p>
+            </div>
+
+            <button id="decide-button" class="decide-button" type="button">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="8" r="1.3" fill="currentColor"/><circle cx="16" cy="8" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="8" cy="16" r="1.3" fill="currentColor"/><circle cx="16" cy="16" r="1.3" fill="currentColor"/></svg>
+              <span>幫我決定！</span><span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+            <p class="button-hint">想再試試？隨時都可以重新抽選。</p>
+            <noscript><p class="noscript-message">請啟用瀏覽器的 JavaScript，以顯示餐點並使用隨機抽選。</p></noscript>
+          </section>
+
+          <section class="meal-section" aria-labelledby="meal-title">
+            <div class="meal-section-heading">
+              <div><p class="eyebrow menu-eyebrow">THE DAILY MENU</p><h2 id="meal-title">美味候選名單</h2></div>
+              <span class="meal-count">7 種選擇</span>
+            </div>
+            <p class="menu-copy">都是日常好滋味，今天會輪到誰呢？</p>
+            <ul id="meal-list" class="meal-list" aria-label="七種預設餐點"></ul>
+            <p class="menu-note"><span aria-hidden="true">↻</span> 每次都是新的機會，也可能遇見同一道美味。</p>
+          </section>
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <p>少一點猶豫，多一點<span class="footer-heart" aria-hidden="true">♡</span>美味。</p>
+        <p>今天吃什麼？ <span class="footer-separator" aria-hidden="true">/</span> V1.0</p>
+      </footer>
+    </div>
+  </body>
+</html>
