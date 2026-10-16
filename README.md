@@ -1,114 +1,93 @@
-# 今天吃什麼？ V1.0
+# 今天吃什麼？ V1.1
 
-一個幫助選擇下一餐的簡易靜態網站，也是大學 GitHub 版本控制與協作作業的初始版本。以 HTML、CSS 與原生 JavaScript 製作，無框架、後端、資料庫或外部套件，可直接部署至 GitHub Pages。
+以 HTML、CSS、原生 JavaScript 製作的靜態餐點抽選網站，用來練習 GitHub 版本控制與協作。沒有框架、後端、資料庫或外部套件。
 
-## V1.0 功能
+本次修改適合由 Yanlin 在 `feature/yanlin-add-foods` 分支提出 pull request，經檢查後合併到 `main`。
 
-- 顯示七種預設餐點：咖哩飯、牛肉麵、水餃、漢堡、披薩、便當、義大利麵。
-- 點擊「幫我決定！」，立即隨機選出一個餐點，並標示對應的候選餐點。
-- 可以重複點擊重新抽選；每次都從全部七種餐點抽選，每種機會相同，允許連續抽到同一餐點。
-- 奶油色與珊瑚橘的簡潔版面，支援手機及電腦。
-- 使用原生按鈕支援鍵盤操作，抽選結果透過 `aria-live` 提供螢幕閱讀器通知。
+## V1.1 的變更
 
-**目前沒有實作**新增餐點、刪除餐點、`localStorage` 或避免連續重複的功能。這些功能保留給後續版本；重新整理會回到尚未抽選的初始畫面。
+- 保留 V1.0 的七種餐點，新增壽司、炒飯與火鍋，共十種餐點。
+- 候選餐點數量及無障礙標籤，根據 `meals.length` 自動產生。
+- 調整候選名單版面：只有奇數筆的最後一張卡片跨兩欄；十種餐點以兩欄、五列顯示。
+- 頁首及頁尾版本文字更新為 V1.1。
+
+這次新增的是程式中的預設資料，沒有建立讓訪客新增或刪除餐點的操作介面。也沒有加入 `localStorage` 或避免連續重複抽選的功能。
+
+## 十種餐點
+
+咖哩飯、牛肉麵、水餃、漢堡、披薩、便當、義大利麵、壽司、炒飯、火鍋。
+
+每次點擊「幫我決定！」都會從全部十種餐點中隨機選出一種，允許連續抽到相同餐點。重新整理後回到初始狀態。
 
 ## 檔案結構
 
 ```text
-today-menu/
-├── index.html  # 網頁結構與文字
-├── style.css   # 色彩、版面及響應式樣式
-├── script.js   # 七種固定餐點、名單顯示及隨機抽選
-└── README.md   # 專案說明與操作建議
+web-github-test/
+├── index.html  # 網頁結構、版本文字及餐點數量容器
+├── style.css   # 色彩、響應式版面及餐點卡片排列
+├── script.js   # 十種餐點資料、數量顯示及抽選
+└── README.md   # 專案與協作說明
 ```
 
-餐點資料集中在 `script.js` 的 `meals` 陣列，畫面與抽選共用這份資料。隨機索引使用 `Math.floor(Math.random() * meals.length)`，範圍是 0–6。CSS 與 JavaScript 使用相對路徑，適用於 GitHub Pages 的專案子目錄。
+## 執行方式
 
-## 在電腦執行
+四個檔案放在同一資料夾，直接使用現代瀏覽器開啟 `index.html` 即可，並保持 JavaScript 啟用。
 
-### 直接開啟
-
-將四個檔案放在同一個資料夾，使用現代瀏覽器開啟 `index.html` 即可。需要啟用 JavaScript，不必安裝 Node.js 或執行建置。網站沒有外部資源請求，也能離線使用。
-
-### 使用本機伺服器（選用）
-
-若電腦已安裝 Python，在專案資料夾開啟終端機並執行：
+若電腦已安裝 Python，也可在專案資料夾執行：
 
 ```bash
-python -m http.server 8000
+python -m http.server 8001
 ```
 
-在瀏覽器開啟 `http://localhost:8000`。停止伺服器時按 `Ctrl+C`。
+瀏覽 `http://localhost:8001`；以 `Ctrl+C` 停止伺服器。不需要安裝套件或執行建置。
 
-## 建立初始 commit 與 v1.0 標記
+## 程式說明
 
-以下指令適用於**尚未初始化 Git 的新專案資料夾**。先進入含這四個檔案的資料夾，再依序執行。若已經是 Git repository，略過 `git init` 並使用現有分支。
+餐點資料集中在 `script.js` 的 `meals` 陣列。新增的三筆資料為：
 
-```bash
-git init -b main
-git add index.html style.css script.js README.md
-git commit -m "feat: build meal picker v1.0"
-git tag -a v1.0 -m "V1.0: seven preset meals and random selection"
-git log --oneline --decorate
+```javascript
+{ name: "壽司", emoji: "🍣", description: "一口鮮美，清爽好滋味" },
+{ name: "炒飯", emoji: "🍚", description: "粒粒分明，暖胃又滿足" },
+{ name: "火鍋", emoji: "🍲", description: "熱騰騰一鍋，暖心好滋味" },
 ```
 
-請先完成測試再建立標記，讓 `v1.0` 指向已確認可用的初始版本。若 Git 要求作者資訊，設定自己的 `user.name` 與 `user.email` 後再提交。`v1.0` 是 Git tag，不是分支。
+抽選使用 `Math.floor(Math.random() * meals.length)`，現在產生的索引為 0–9。畫面上的選擇數量同樣從這份陣列取得。
 
-### 推送到 GitHub
+## 協作流程
 
-先在 GitHub 建立新的空 repository，例如 `today-menu`。因為本機已經有 README，建立遠端時不要另外初始化 README、`.gitignore` 或授權檔案。
+1. Repository 擁有者在 GitHub 邀請 Yanlin 成為 collaborator，Yanlin 接受邀請。
+2. Yanlin clone 專案，在更新後的 `main` 上建立 `feature/yanlin-add-foods` 分支。
+3. 在該分支套用這次的四個檔案，測試後 commit 並 push 分支。
+4. Yanlin 在 GitHub 建立 PR：base 為 `main`，compare 為 `feature/yanlin-add-foods`。
+5. 擁有者檢查變更與功能後合併 PR。GitHub Pages 會依 `main` 的內容重新部署。
+6. 雙方同步最新的 `main`。確認新版本可用後，再由擁有者建立及推送 `v1.1` tag。
 
-將下方 `YOUR-USERNAME` 與 `YOUR-REPOSITORY` 換成自己的帳號及 repository 名稱：
+原始 `v1.0` tag 保留作為七種餐點版本的快照。
 
-```bash
-git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-git push -u origin main
-git push origin v1.0
-```
+## 測試清單
 
-若已設定 `origin`，不必再次新增；先使用 `git remote -v` 確認目標。上述操作是建議，交付檔案本身尚未建立 commit、tag 或遠端 repository。
+- [ ] 初始畫面顯示 V1.1、10 種選擇與十張餐點卡片。
+- [ ] 原始七種餐點與新增三種餐點都在名單中，初次載入不會自動抽選。
+- [ ] 重複抽選結果都來自這十種餐點，且選中標示與餐點一致。
+- [ ] 新增的壽司、炒飯、火鍋也能被抽中。
+- [ ] Enter／空白鍵可以抽選，重新整理會回到初始狀態。
+- [ ] 手機及電腦版面沒有水平溢出，十張卡片兩欄排列。
+- [ ] 合併後，GitHub Pages 上的版本與功能正常。
 
-## 部署至 GitHub Pages
+## 修改包交付前驗證
 
-1. 將四個檔案放在 repository 的根目錄並推送至 `main`。
-2. 進入該 repository 的 **Settings → Pages**。
-3. 在 **Build and deployment → Source** 選擇 **Deploy from a branch**。
-4. 在 **Branch** 選擇 `main`，資料夾選擇 `/(root)`，按 **Save**。
-5. 等待部署完成，再使用 Pages 設定頁顯示的網站網址開啟網站。
+- 已完成 100 次連續抽選，十種餐點都曾出現，包含新增的壽司、炒飯與火鍋。
+- 每次結果均屬於候選名單，且只標示一張正確的餐點卡片；也觀察到連續重複抽選。
+- Enter、空白鍵及重新整理功能正常。
+- 320、390、1280px 寬度沒有水平溢出；十張卡片均排列成兩欄、五列。
+- JavaScript 語法檢查通過，HTML／CSS／JavaScript 均成功載入，瀏覽器沒有回報錯誤或警告。
 
-GitHub.com 的一般專案網站網址格式為 `https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/`。使用 GitHub Free 時，可將作業 repository 設為 public 以使用 Pages；其他帳號方案及校方設定請依實際環境確認。
+以上是本機修改包的測試結果。PR 合併後，再依測試清單確認正式 GitHub Pages 網站。
 
-參考：[GitHub 官方部署來源設定](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)、[GitHub 官方網站部署說明](https://docs.github.com/en/get-started/start-your-journey/deploying-your-website-automatically)。
+## 連結
 
-## 已完成的本機驗證
+- [GitHub repository](https://github.com/ccc519/web-github-test)
+- [GitHub Pages 網站](https://ccc519.github.io/web-github-test/)
+- [GitHub Flow 官方說明](https://docs.github.com/en/get-started/using-github/github-flow)
 
-本次交付已使用瀏覽器完成以下檢查：
-
-| 檢查項目 | 結果 |
-| --- | --- |
-| 初次載入 | 標題及七種餐點正常顯示，未自動抽選 |
-| 連續抽選 50 次 | 結果皆在候選名單內，七種餐點都曾出現，按鈕持續可用 |
-| 選中項目 | 每次只標示一個項目，與結果餐點一致 |
-| 連續重複 | 已觀察到連續抽中相同餐點，符合 V1.0 要求 |
-| 重新整理 | 回到尚未抽選的狀態，清除選中標示 |
-| 鍵盤操作 | Enter 及空白鍵均能抽選 |
-| 響應式版面 | 320、390、768、1280px 寬度沒有水平溢出 |
-| JavaScript 與資源 | 語法檢查通過，HTML／CSS／JS 正常載入，瀏覽器未回報錯誤 |
-
-GitHub Pages 尚未實際部署；上線後請再確認部署網址的樣式與抽選功能。
-
-## 自行檢查清單
-
-- [ ] 初次載入顯示標題「今天吃什麼？」及七種餐點，尚未自動抽選。
-- [ ] 點擊「幫我決定！」後，結果必定是候選名單中的一個餐點。
-- [ ] 結果餐點的候選項目會被標示，且只標示一個項目。
-- [ ] 可以連續抽選，按鈕不會失效；重複抽到同一餐點是正常行為。
-- [ ] 重新整理後回到初始狀態，不會保存上次結果。
-- [ ] 使用 Tab 選取按鈕，再按 Enter 或空白鍵，可以抽選。
-- [ ] 手機及電腦版面正常，沒有水平捲動或文字遮擋。
-- [ ] GitHub Pages 上的樣式與抽選功能正常載入。
-
-## 後續協作建議
-
-以 `v1.0` 保留本次作業基準。後續新增功能時，先開 GitHub issue 討論需求，從更新後的 `main` 建立功能分支，完成後透過 pull request 請同學檢查，再合併回 `main`。新增、刪除、儲存或避免重複等需求應在後續版本獨立開發。
-"# Test1" 
+網站跟著 `main` 部署。尚未合併的功能分支不會更新這個正式網站網址。

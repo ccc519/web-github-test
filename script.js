@@ -1,4 +1,4 @@
-// V1.0 的七種固定餐點；畫面與抽選共用同一份資料。
+// V1.1 的固定餐點；畫面、餐點數量與抽選共用同一份資料。
 const meals = [
   { name: "咖哩飯", emoji: "🍛", description: "濃郁醬香，暖心又飽足" },
   { name: "牛肉麵", emoji: "🍜", description: "一碗熱湯，滿滿幸福" },
@@ -7,15 +7,23 @@ const meals = [
   { name: "披薩", emoji: "🍕", description: "起司牽絲，好心情開始" },
   { name: "便當", emoji: "🍱", description: "飯菜齊全，日常好夥伴" },
   { name: "義大利麵", emoji: "🍝", description: "捲起麵條，享受這一餐" },
+  { name: "壽司", emoji: "🍣", description: "一口鮮美，清爽好滋味" },
+  { name: "炒飯", emoji: "🍚", description: "粒粒分明，暖胃又滿足" },
+  { name: "火鍋", emoji: "🍲", description: "熱騰騰一鍋，暖心好滋味" },
 ];
 
 const mealList = document.querySelector("#meal-list");
+const mealCount = document.querySelector("#meal-count");
 const decideButton = document.querySelector("#decide-button");
 const welcomeArt = document.querySelector("#welcome-art");
 const resultEmoji = document.querySelector("#result-emoji");
 const resultCaption = document.querySelector("#result-caption");
 const resultName = document.querySelector("#result-name");
 const resultDescription = document.querySelector("#result-description");
+
+// 從陣列取得實際數量，讓可見文字與無障礙標籤保持一致。
+mealCount.textContent = `${meals.length} 種選擇`;
+mealList.setAttribute("aria-label", `${meals.length} 種預設餐點`);
 
 // 使用原生 DOM API 顯示餐點，不需框架或外部套件。
 meals.forEach((meal) => {
@@ -42,7 +50,7 @@ meals.forEach((meal) => {
 });
 
 decideButton.addEventListener("click", () => {
-  // 每次都從全部七種餐點抽選，允許連續抽到相同餐點。
+  // 每次都從全部餐點抽選，允許連續抽到相同餐點。
   const randomIndex = Math.floor(Math.random() * meals.length);
   const selectedMeal = meals[randomIndex];
 
